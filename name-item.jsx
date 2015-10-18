@@ -1,5 +1,4 @@
 var React = require('react'),
-    ReactDOM = require('react-dom'),
     model = require('./model.js'),
     NamesList = require('./names-list.jsx');
 
@@ -9,51 +8,52 @@ class NameItem extends React.Component {
         this.state = {editing: false}
     }
 
-    handleSubmit(event) {
+    componentDidUpdate() {
+        if(this.state.editing) {
+            this.refs.input.focus()
+
+            //Move focus caret to end of input's value
+            this.refs.input.value = this.refs.input.value
+        }
+    }
+
+    render() {
+        var content
+        if (this.state.editing) {
+            content = (
+              <form onSubmit={this.handleSaveSubmit.bind(this)}>
+                  <input type="text" ref="input" defaultValue={this.props.name} />
+                  <button>save</button>
+              </form>
+            )
+        } else {
+            content = (
+              <div>
+                  <span>{this.props.name}   </span>
+                  <button onClick={this.handleEditClick.bind(this)}>edit</button>
+              </div>
+            )
+        }
+        return (
+            <li>
+              {content}
+            </li>
+        )
+    }
+
+    handleEditClick() {
+        this.setState({ editing: true})
+    }
+
+    handleSaveSubmit(event) {
         event.preventDefault()
         var input = this.refs.input
         model.
-            call(['names', 'edit'], [this.props.idx, input.value]).
+            call(['names', 'set'], [this.props.idx, input.value]).
             then(() => {
                 this.setState({ editing: false})
                 this.props.update()
             })
-    }
-
-    componentDidMount() {
-      this.refs.name.style.width = 0
-    }
-
-    componentDidUpdate() {
-      if(this.state.editing) {
-        ReactDOM.findDOMNode(this.refs.input).focus()
-
-        //Ensure focus moves to end of input's value
-        this.refs.input.value = this.refs.input.value
-
-        this.refs.input.style.width = (this.refs.input.value.length+3)*8+'px'
-      }
-    }
-
-    render() {
-      return (
-        <li>
-          {this.state.editing
-            ?
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                <input type="text" ref="input" defaultValue={this.props.name} />
-                <button>save</button>
-              </form>
-            :
-              <div  ref="name" onClick={this.handleClick.bind(this)}>
-                {this.props.name}
-              </div>}
-        </li>
-      )
-    }
-
-    handleClick() {
-        this.setState({ editing: true})
     }
 }
 

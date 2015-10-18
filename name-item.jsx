@@ -42,16 +42,18 @@ class NameItem extends React.Component {
     }
 
     handleEditClick() {
-        this.setState({ editing: true})
+        this.setState({editing: true})
     }
 
     handleSaveSubmit(event) {
         event.preventDefault()
-        var input = this.refs.input
-        model.
-            call(['names', 'set'], [this.props.idx, input.value]).
-            then(() => {
-                this.setState({ editing: false})
+        var input = this.refs.input,
+            idx = this.props.idx,
+            jsonGraph = {names: {}}
+        jsonGraph.names[idx] = {name: input.value}
+        model.set({paths: [['names',idx, 'name']], jsonGraph})
+            .then(() => {
+                this.setState({editing: false})
                 this.props.update()
             })
     }

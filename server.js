@@ -50,6 +50,22 @@ var FalcorServer = require('falcor-express'),
                     }
                 ]
             }
+        },
+        {
+          route: 'names.edit',
+          call: (callPath, args) => {
+            var id = args[0],
+                editName = args[1]
+
+            data.names[id].name = editName
+
+            return [
+                {
+                    path: ['names', id, 'name'],
+                    value: editName
+                }
+            ]
+          }
         }
     ])
 

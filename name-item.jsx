@@ -48,10 +48,8 @@ class NameItem extends React.Component {
     handleSaveSubmit(event) {
         event.preventDefault()
         var input = this.refs.input,
-            idx = this.props.idx,
-            jsonGraph = {names: {}}
-        jsonGraph.names[idx] = {name: input.value}
-        model.set({paths: [['names',idx, 'name']], jsonGraph})
+            idx = this.props.idx;
+        model.setValue(['names',idx, 'name'], input.value)
             .then(() => {
                 this.setState({editing: false})
                 this.props.update()

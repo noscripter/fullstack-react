@@ -41,12 +41,10 @@ var FalcorServer = require('falcor-express'),
 
                 return [
                     {
-                        path: ['names', data.names.length-1, 'name'],
-                        value: newName
+                        path: ['names', data.names.length-1, 'name']
                     },
                     {
-                        path: ['names', 'length'],
-                        value: data.names.length
+                        path: ['names', 'length']
                     }
                 ]
             }

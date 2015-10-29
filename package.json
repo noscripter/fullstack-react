@@ -8,10 +8,10 @@
   "dependencies": {
     "body-parser": "1.14.1",
     "express": "4.13.3",
-    "falcor": "0.1.13",
+    "falcor": "0.1.14",
     "falcor-express": "0.1.2",
     "falcor-http-datasource": "0.1.2",
-    "falcor-router": "0.2.9",
+    "falcor-router": "0.2.11",
     "react": "0.14.0",
     "react-dom": "0.14.0"
   },

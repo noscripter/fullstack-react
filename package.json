@@ -7,9 +7,9 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.14.1",
-    "express": "4.13.3",
+    "express": "4.15.5",
     "falcor": "0.1.13",
-    "falcor-express": "0.1.2",
+    "falcor-express": "0.1.4",
     "falcor-http-datasource": "0.1.2",
     "falcor-router": "0.2.9",
     "react": "0.14.0",
